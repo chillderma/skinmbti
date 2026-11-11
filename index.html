@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>膚質 MBTI 測驗｜李嘉倫醫師</title>
+<meta name="description" content="換保養品像在抽獎？1 分鐘、12 題，測出你的膚質 MBTI。皮膚專科 李嘉倫醫師 × 質感醫美。">
+<link rel="canonical" href="https://chillderma.github.io/skinmbti/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://chillderma.github.io/skinmbti/">
+<meta property="og:title" content="膚質 MBTI 測驗｜你是哪一型？">
+<meta property="og:description" content="換保養品像在抽獎？1 分鐘、12 題，測出你的膚質 MBTI。皮膚專科 李嘉倫醫師 × 質感醫美。">
+<meta property="og:image" content="https://chillderma.github.io/skinmbti/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="zh_TW">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#E6E4E0">
+<link rel="icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;900&display=swap">
+<style>
+/* Layout: one centered "IG card" column (max 560px); one screen at a time — 封面 → 12 題 → 結果。單一淺色主題，延續 chill_derma 貼文的紙張灰調 */
+:root{
+  --paper:#E6E4E0;      /* 貼文底色 */
+  --paper-2:#EFEDEA;    /* 選項底 */
+  --ink:#1C1B1A;        /* 主文字 */
+  --ink-2:#55524D;      /* 次文字 */
+  --line:#CFCBC4;
+  --accent:#456E7A;     /* 九宮格的深藍綠 */
+  --accent-ink:#FFFFFF;
+  --c1:#ECEFF4; --c2:#EEF3F1; --c3:#FBF3EA; --c4:#F6ECEC; /* 16 宮格四欄底色 */
+  --serif:"Noto Serif TC","Songti TC","PMingLiU",serif;
+  --script:"Cormorant Garamond","Times New Roman",serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;background:var(--paper);color:var(--ink)}
+img{max-width:100%}
+body{font-family:var(--serif);font-size:17px;line-height:1.75;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  background-image:radial-gradient(rgba(0,0,0,.025) 1px,transparent 1px);background-size:3px 3px}
+.wrap{max-width:560px;margin:0 auto;padding-block:28px 48px;min-height:100%;display:flex;flex-direction:column;gap:28px}
+.brand{font-weight:900;letter-spacing:.12em;font-size:18px;line-height:1.4}
+.brand small{font-weight:400;font-size:13px;letter-spacing:.1em;color:var(--ink-2);margin-left:6px}
+.sign{font-weight:600;font-size:16px;letter-spacing:.06em;line-height:1;text-align:right}
+.btn.line-btn{display:block;text-align:center;text-decoration:none;background:#06C755;border-color:#06C755;color:#fff}
+.btn.line-btn:hover{background:#05A847;border-color:#05A847}
+h1,h2,h3{margin:0;font-weight:900;line-height:1.35;overflow-wrap:anywhere}
+.ph{display:inline-block}
+h1{font-size:40px}
+h2{font-size:26px}
+h3{font-size:19px}
+p{margin:0}
+.muted{color:var(--ink-2)}
+.screen{display:flex;flex-direction:column;gap:24px}
+.axes{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center}
+.axes div{border:1px solid var(--line);padding:12px 4px;background:var(--paper-2)}
+.axes b{display:block;font-size:20px;letter-spacing:.02em;white-space:nowrap}
+.axes span{font-size:13px;color:var(--ink-2)}
+.btn{font:inherit;font-weight:600;cursor:pointer;border:1px solid var(--ink);background:var(--ink);color:var(--paper);
+  padding:14px 22px;font-size:17px;letter-spacing:.1em;transition:background .15s,color .15s}
+.btn:hover{background:var(--accent);border-color:var(--accent)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:var(--paper)}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.note{font-size:13px;color:var(--ink-2);line-height:1.6}
+
+/* 題目 */
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.back{font:inherit;font-size:14px;background:none;border:0;color:var(--ink-2);cursor:pointer;padding:4px 0;letter-spacing:.06em}
+.back:disabled{visibility:hidden}
+.bar{height:3px;background:var(--line)}
+.bar i{display:block;height:100%;background:var(--accent);transition:width .3s}
+.eyebrow{font-size:14px;letter-spacing:.14em;color:var(--accent);font-weight:600}
+.opts{display:flex;flex-direction:column;gap:12px}
+.opt{font:inherit;text-align:left;cursor:pointer;background:var(--paper-2);border:1px solid var(--line);color:var(--ink);
+  padding:18px 20px;font-size:17px;line-height:1.6;display:flex;gap:14px;align-items:baseline;transition:border-color .15s,background .15s}
+.opt:hover{border-color:var(--ink)}
+.opt.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.opt .k{font-weight:900;min-width:1.2em}
+
+/* 結果 */
+.code{font-size:80px;font-weight:900;letter-spacing:.08em;line-height:1}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;background:#fff;padding:3px}
+.cell{text-align:center;padding:12px 2px;line-height:1.3;font-size:15px;font-weight:600;color:#33454B}
+.cell small{display:block;font-weight:400;font-size:14px}
+.cell:nth-child(4n+1){background:var(--c1)}.cell:nth-child(4n+2){background:var(--c2)}
+.cell:nth-child(4n+3){background:var(--c3)}.cell:nth-child(4n+4){background:var(--c4)}
+.cell.me{background:var(--accent)!important;color:#fff}
+.axis{border-top:1px solid var(--line);padding-top:18px;display:flex;flex-direction:column;gap:8px}
+.axis-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.lvl{font-size:13px;letter-spacing:.08em;color:var(--ink-2);white-space:nowrap}
+.meter{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+.meter i{height:6px;background:var(--line)}
+.meter i.f{background:var(--accent)}
+.cta{border:1px solid var(--ink);padding:20px;display:flex;flex-direction:column;gap:10px;background:var(--paper-2)}
+.row{display:flex;gap:12px;flex-wrap:wrap}
+.row .btn{flex:1 1 200px}
+/* 翻牌結果卡 */
+.flip{perspective:1200px}
+.flip-in{position:relative;transform-style:preserve-3d;animation:flip .9s cubic-bezier(.2,.7,.2,1) .15s both}
+.face{backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1px solid var(--line);padding:28px 24px;display:flex;flex-direction:column;gap:6px}
+.front{background:var(--tc,var(--paper-2))}
+.face-back{position:absolute;inset:0;transform:rotateY(180deg);background:var(--accent);color:#fff;align-items:center;justify-content:center;font-size:56px;font-weight:900;letter-spacing:.1em}
+@keyframes flip{from{transform:rotateY(180deg)}to{transform:rotateY(0)}}
+.family{font-size:13px;letter-spacing:.12em;color:var(--ink-2)}
+.share-line{text-align:center;font-weight:600}
+.tname{font-size:36px;font-weight:900;line-height:1.2;margin-top:-8px}
+.combo{color:var(--ink-2);letter-spacing:.04em}
+.cardbox{display:flex;flex-direction:column;gap:12px;align-items:center;text-align:center}
+.cardbox img{width:100%;max-width:320px;border:1px solid var(--line);box-shadow:0 6px 24px rgba(0,0,0,.08)}
+.toast{font-size:14px;color:var(--accent);min-height:1.4em}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="brand">李嘉倫醫師<small>皮膚專科 x 質感醫美</small></div>
+
+  <!-- 封面 -->
+  <section class="screen" id="intro">
+    <h1><span class="ph">換保養品</span><span class="ph">像在抽獎？</span></h1>
+    <p style="font-size:20px;font-weight:600">1 分鐘，測出你的膚質 MBTI</p>
+    <p>皮膚科教科書 <i>Fitzpatrick's Dermatology</i> 收錄的 Baumann 膚質分類，用 4 個軸向組合出 16 種膚質。回答 12 題，找出你的 4 個字母。</p>
+    <div class="axes" aria-label="四個軸向">
+      <div><b>D／O</b><span>乾／油</span></div>
+      <div><b>S／R</b><span>敏／耐</span></div>
+      <div><b>P／N</b><span>色／勻</span></div>
+      <div><b>W／T</b><span>皺／緊</span></div>
+    </div>
+    <button class="btn" id="start">開始測驗</button>
+    <p class="note">約 1 分鐘。本測驗為自我觀察工具，結果僅供參考，不能取代醫師診斷。</p>
+  </section>
+
+  <!-- 題目 -->
+  <section class="screen" id="quiz" hidden>
+    <div class="top">
+      <button class="back" id="back">← 上一題</button>
+      <span class="lvl" id="count"></span>
+    </div>
+    <div class="bar"><i id="prog"></i></div>
+    <p class="eyebrow" id="axisLabel"></p>
+    <h2 id="qText"></h2>
+    <div class="opts" id="opts"></div>
+  </section>
+
+  <!-- 結果 -->
+  <section class="screen" id="result" hidden>
+    <div class="flip"><div class="flip-in" id="flipCard">
+      <div class="face front" id="front">
+        <p class="eyebrow">你的膚質 MBTI</p>
+        <div class="code" id="code"></div>
+        <div class="tname" id="tname"></div>
+        <p class="combo" id="codeDesc"></p>
+      </div>
+      <div class="face face-back" aria-hidden="true">?</div>
+    </div></div>
+    <p id="tdesc"></p>
+    <div id="axesOut" style="display:flex;flex-direction:column;gap:20px"></div>
+    <div class="cta">
+      <h3><span class="ph">4 個字母，</span><span class="ph">是評估的起點，</span><span class="ph">不是答案</span></h3>
+      <p class="muted">乾／敏／色／衰常常是「混合型」，例如敏感＋易色素，每一步保養與治療都要重新安排。</p>
+      <p>想知道更詳細的膚質分析？<b>加入官方 LINE，輸入「膚質」</b>，領取完整版《膚質 MBTI 自我檢測表》。門診時帶著它，評估會快很多。</p>
+      <a class="btn line-btn" href="http://lin.ee/N37nNRK" target="_blank" rel="noopener">加入官方 LINE</a>
+    </div>
+    <div class="cardbox">
+      <h3>你的結果卡</h3>
+      <img id="cardImg" alt="膚質 MBTI 結果卡">
+      <p class="note">手機長按圖片即可儲存，分享到限動記得標註 @chill_derma</p>
+      <button class="btn ghost" id="dl">下載結果卡</button>
+    </div>
+    <p class="share-line">你的朋友是哪一型？傳給他測測看 👇</p>
+    <div class="row">
+      <button class="btn" id="share">傳給朋友</button>
+      <button class="btn ghost" id="copy">複製我的結果</button>
+    </div>
+    <div class="row">
+      <button class="btn ghost" id="again">重新測驗</button>
+    </div>
+    <p class="toast" id="toast" aria-live="polite"></p>
+    <p class="note">本測驗依自我觀察簡化而成，結果僅供參考，不能取代醫師診斷。如有皮膚問題，請諮詢皮膚科專科醫師。</p>
+  </section>
+
+  <div class="sign">@chill_derma</div>
+</div>
+
+<script>
+// ===== 內容設定：改題目、選項、說明只需改這裡 =====
+const AXES = [
+  {id:"DO", name:"第一軸：乾 vs 油", q:"你的皮膚缺水，還是缺油？",
+   L:{k:"D",zh:"乾性",tip:"重點是修復皮膚屏障＋鎖水，而不是一直疊加保養品。"},
+   R:{k:"O",zh:"油性",tip:"重點是溫和清潔與輕質保濕，過度去油反而讓出油更失控。"}},
+  {id:"SR", name:"第二軸：敏感 vs 耐受", q:"換保養品像抽獎，中獎率超高？",
+   L:{k:"S",zh:"敏感",tip:"原則是「精簡」：先把清潔、保濕、防曬做穩，再談其他。任何療程都需要放慢節奏、拉長間隔（Go slow）。"},
+   R:{k:"R",zh:"耐受",tip:"皮膚耐受度較好，但仍以清潔、保濕、防曬為基礎，新產品一次加一樣。"}},
+  {id:"PN", name:"第三軸：色素 vs 均勻", q:"曬一次、長一顆痘，就留印半年？",
+   L:{k:"P",zh:"易色素",tip:"第一課永遠是防曬，沒有防曬，任何淡斑都是做白工。做雷射等治療前，要先與醫師討論如何預防發炎後色素沉澱（PIH）。"},
+   R:{k:"N",zh:"膚色均勻",tip:"色素反應較少，防曬仍是長期維持膚色的基本功。"}},
+  {id:"WT", name:"第四軸：皺紋 vs 緊緻", q:"臉上的緊實度，是否悄悄變化？",
+   L:{k:"W",zh:"細紋鬆弛",tip:"細紋、鬆弛可能來自皮膚品質，也可能是深層支撐改變。處理順序通常是：先緊實度，再表面平整與膚色，最後才是亮度。"},
+   R:{k:"T",zh:"緊緻",tip:"目前緊實度不錯，防曬與規律保養是延緩變化的關鍵。"}}
+];
+// pick: 0 = 左邊字母（D/S/P/W），1 = 右邊字母（O/R/N/T）
+const QUESTIONS = [
+  {axis:0, text:"洗完臉 10 分鐘|不擦保養品，臉的感覺是？", opts:[["緊繃、乾澀，甚至脫屑",0],["還好，或很快開始出油",1]]},
+  {axis:0, text:"中午照鏡子，T 字部位通常？", opts:[["幾乎沒有油光",0],["明顯泛油光",1]]},
+  {axis:0, text:"粉刺、毛孔阻塞的狀況？", opts:[["很少出現",0],["常常有",1]]},
+  {axis:1, text:"換新的保養品時，通常會？", opts:[["容易泛紅、刺癢，常要停用",0],["幾乎什麼都能擦",1]]},
+  {axis:1, text:"遇熱、運動或情緒激動時？", opts:[["臉很容易紅",0],["不太會變紅",1]]},
+  {axis:1, text:"用含酸類的保養品，|或換膚之後？", opts:[["容易刺痛、脫皮",0],["沒什麼感覺",1]]},
+  {axis:2, text:"曬太陽之後，皮膚通常？", opts:[["容易變黑",0],["多半泛紅，之後就退了",1]]},
+  {axis:2, text:"痘痘好了之後？", opts:[["常留下深色印記，好幾個月才淡",0],["痘印消得很快",1]]},
+  {axis:2, text:"斑點的狀況？", opts:[["臉上已有斑點，或家人容易長斑",0],["自己和家人都很少",1]]},
+  {axis:3, text:"仔細照鏡子時，細紋？", opts:[["已經看得出來",0],["很少",1]]},
+  {axis:3, text:"跟幾年前的照片比，|臉部輪廓？", opts:[["有點下垂，法令紋變深",0],["差不多",1]]},
+  {axis:3, text:"平常的防曬習慣？", opts:[["常常忘記或沒擦",0],["幾乎天天做好防曬",1]]}
+];
+// 16 宮格排列與編號（同貼文）
+const GRID = [["DRPT",13],["DRNT",14],["DSPT",1],["DSNT",2],["DRPW",15],["DRNW",16],["DSPW",3],["DSNW",4],
+              ["ORPT",9],["ORNT",10],["OSPT",5],["OSNT",6],["ORPW",11],["ORNW",12],["OSPW",7],["OSNW",8]];
+// 16 型名稱與一句話說明（2026-11-07 定稿）
+const TYPES = {
+  DSPT:["初雪山茶","洗完臉易緊繃、換保養品常刺癢，曬後容易變黑，底子還算緊實。要先把屏障顧穩。"],
+  DSNT:["含羞草","容易乾、遇熱就臉紅，膚色倒是均勻、彈性也不錯。保養重點在「精簡」。"],
+  DSPW:["乾燥花","偏乾又敏感，痘印和曬斑不易退，細紋也開始出現。四個面向都要顧，順序是關鍵。"],
+  DSNW:["溫室玫瑰","秋冬容易脫屑、偶爾刺癢，膚色均勻，但眼周、額頭已有細紋。先鎖水，再談抗老。"],
+  OSPT:["夏日草莓","容易出油長痘、也容易泛紅，痘痘好了常留下深色印記。控油要溫和，防曬不能少。"],
+  OSNT:["小辣椒","T 字容易出油，換保養品又常刺癢泛紅；膚色和彈性都不錯。清潔別太用力是第一課。"],
+  OSPW:["焦糖布蕾","會出油又敏感，曬斑、痘印和細紋也找上門。需求彼此拉扯，先後順序要排好。"],
+  OSNW:["熟成番茄","出油、易泛紅，膚色均勻，但輪廓線開始變模糊。處理鬆弛前，先讓皮膚穩下來。"],
+  ORPT:["陽光小麥","皮膚強壯、什麼都能擦，但曬後容易變黑、痘印退得慢。防曬是第一課。"],
+  ORNT:["元氣蜜桃","中午容易泛油光，皮膚耐受度好、膚色均勻又緊實。煩惱主要在出油，別過度去油。"],
+  ORPW:["戶外探險家","皮膚耐操，但長年日曬累積的斑點和細紋慢慢浮現。斑和紋要一起規劃。"],
+  ORNW:["經典橡木","皮膚穩定、膚色均勻，細紋和輪廓變化是目前的主要課題。先顧緊實度這個地基。"],
+  DRPT:["沙漠旅人","容易缺水、卡粉，但耐受度好；曬後容易變黑。保濕和防曬兩手都要顧。"],
+  DRNT:["白煮蛋","皮膚穩定、膚色均勻又緊實，只是容易乾、上妝易卡粉。重點放在修復屏障＋鎖水。"],
+  DRPW:["日曬杏桃","偏乾、曬後易變黑，斑點和細紋同時出現。先後順序排對，比多擦幾罐重要。"],
+  DRNW:["沙漠玫瑰","容易乾，但耐受度好、膚色均勻，細紋和鬆弛是主要課題。"]
+};
+// 4 色系（同 IG 貼文 16 宮格的四欄）：依「敏感/耐受 × 易色素/均勻」
+const FAMILY = { // 莫蘭迪色系：底色／主文字／次文字／強調
+  RP:{color:"#E3D3C8",fg:"#744749",sub:"#6F736C",ac:"#B08962",name:"奶茶｜耐受＋易色素"},
+  RN:{color:"#DFDFD7",fg:"#595A4A",sub:"#6F736C",ac:"#6F736C",name:"鼠尾草｜耐受＋均勻"},
+  SP:{color:"#FCEDE3",fg:"#744749",sub:"#929895",ac:"#B06F5E",name:"杏色｜敏感＋易色素"},
+  SN:{color:"#D6C7D9",fg:"#595A4A",sub:"#6F736C",ac:"#744749",name:"霧紫｜敏感＋均勻"}
+};
+// 分享用網址（之後若放到自己的網域，改這裡即可）
+const SHARE_URL = "https://chillderma.github.io/skinmbti/";
+// ===== 以下為程式 =====
+const $=id=>document.getElementById(id);
+// 標題斷行：只在標點或空白後換行，避免把詞拆開
+const esc=t=>t.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const phr=t=>t.split(/\||(?<=[，、？：；。　])/).filter(Boolean).map(p=>`<span class="ph">${esc(p)}</span>`).join("");
+let answers=new Array(QUESTIONS.length).fill(null), cur=0;
+function show(id){["intro","quiz","result"].forEach(s=>$(s).hidden=s!==id);window.scrollTo(0,0)}
+function render(){
+  const q=QUESTIONS[cur], ax=AXES[q.axis];
+  $("count").textContent=`${cur+1} / ${QUESTIONS.length}`;
+  $("prog").style.width=`${cur/QUESTIONS.length*100}%`;
+  $("axisLabel").textContent=ax.name;
+  $("qText").innerHTML=phr(q.text);
+  $("back").disabled=cur===0;
+  const box=$("opts");box.innerHTML="";
+  q.opts.forEach(([t,v],i)=>{
+    const b=document.createElement("button");b.className="opt"+(answers[cur]===v?" on":"");b.id=`opt-${i}`;
+    b.innerHTML=`<span class="k">${"AB"[i]}</span><span></span>`;b.lastChild.textContent=t;
+    b.onclick=()=>{answers[cur]=v;b.classList.add("on");setTimeout(()=>{cur<QUESTIONS.length-1?(cur++,render()):result()},180)};
+    box.appendChild(b);
+  });
+}
+function result(){
+  const out=AXES.map((ax,a)=>{
+    const qs=QUESTIONS.map((q,i)=>q.axis===a?answers[i]:null).filter(v=>v!==null);
+    const left=qs.filter(v=>v===0).length, right=qs.length-left, isL=left>right;
+    return {ax,side:isL?ax.L:ax.R,n:Math.max(left,right),total:qs.length};
+  });
+  const code=out.map(o=>o.side.k).join("");
+  $("code").textContent=code;
+  const combo=out.map(o=>o.side.zh).join("＋"), [tn,td]=TYPES[code];
+  $("codeDesc").textContent=combo;
+  $("tname").textContent=tn;
+  $("tdesc").textContent=td;
+  const fam=FAMILY[code[1]+code[2]];
+  const fc=$("flipCard");fc.style.animation="none";void fc.offsetWidth;fc.style.animation="";
+  drawCard(code,tn,combo,td,out,fam);
+  $("axesOut").innerHTML=out.map(o=>{
+    const strong=o.n===o.total;
+    return `<div class="axis"><div class="axis-head"><h3><span class="ph">${esc(o.ax.name.split("：")[1])}</span>　<span class="ph">→ 偏 ${o.side.k}</span></h3>
+      <span class="lvl">${strong?"明顯":"輕微"}（${o.n}/${o.total}）</span></div>
+      <div class="meter">${Array.from({length:o.total},(_,i)=>`<i class="${i<o.n?"f":""}"></i>`).join("")}</div>
+      <p class="muted">${o.side.tip}</p></div>`}).join("");
+  $("prog").style.width="100%";
+  window._resultText=`我的膚質 MBTI 是 ${code} ${tn}（${combo}）\n想知道自己的膚質MBTI? 👉${SHARE_URL}`;
+  show("result");
+}
+// ===== 結果卡（1080×1920，限動尺寸）=====
+async function drawCard(code,tn,combo,td,out,fam){
+  const tc=fam.color,FG=fam.fg,SUB=fam.sub,AC=fam.ac;
+  const W=1080,H=1920,P=96,FF='"Noto Serif TC","Noto Serif CJK TC",serif';
+  const all="李嘉倫醫師皮膚專科x質感醫美我的膚質MBTI想知道自己的?測驗連結在主頁@chill_derma明顯輕微乾敏色皺DSPWONRT"+tn+combo+td;
+  try{await Promise.all(["400","600","900"].map(w=>document.fonts.load(`${w} 40px "Noto Serif TC"`,all)))}catch(e){}
+  const c=document.createElement("canvas");c.width=W;c.height=H;const x=c.getContext("2d");
+  x.fillStyle=tc;x.fillRect(0,0,W,H);
+  x.textBaseline="alphabetic";
+  const t=(str,X,Y,w,sz,col,al)=>{x.font=`${w} ${sz}px ${FF}`;x.fillStyle=col;x.textAlign=al||"left";x.fillText(str,X,Y)};
+  t("李嘉倫醫師",P,160,900,40,FG);
+  x.font=`900 40px ${FF}`;const bw=x.measureText("李嘉倫醫師").width;
+  t("皮膚專科 x 質感醫美",P+bw+16,160,400,28,SUB);
+  t("我的膚質 MBTI",P,400,600,36,AC);
+  t(code,P-6,650,900,250,FG);
+  t(tn,P,800,900,96,FG);
+  t(combo,P,880,400,38,SUB);
+  // 說明自動換行
+  x.font=`400 42px ${FF}`;let line="",y=990;
+  for(const ch of td){if(x.measureText(line+ch).width>W-P*2){t(line,P,y,400,42,FG);line="";y+=72}line+=ch}
+  if(line)t(line,P,y,400,42,FG);
+  // 四軸強度
+  const lbl={D:"乾",O:"油",S:"敏",R:"耐",P:"色",N:"勻",W:"皺",T:"緊"};
+  out.forEach((o,i)=>{const yy=Math.max(y+150,1230)+i*92;
+    t(`${lbl[o.side.k]} ${o.side.k}`,P,yy,900,36,FG);
+    for(let j=0;j<o.total;j++){x.fillStyle=j<o.n?AC:FG+"33";x.fillRect(320+j*176,yy-22,170,14)}
+    t(o.n===o.total?"明顯":"輕微",W-P,yy,400,30,SUB,"right")});
+  x.fillStyle=FG;x.fillRect(P,1675,W-P*2,2);
+  t("想知道自己的膚質MBTI?",P,1755,600,36,FG);
+  t("測驗連結在主頁 👉",P,1810,600,36,FG);
+  t("@chill_derma",W-P,1810,600,36,FG,"right");
+  const url=c.toDataURL("image/png");$("cardImg").src=url;window._cardUrl=url;window._cardName=`膚質MBTI_${code}.png`;
+}
+$("dl").onclick=()=>{const a=document.createElement("a");a.href=window._cardUrl;a.download=window._cardName;document.body.appendChild(a);a.click();a.remove()};
+$("start").onclick=()=>{cur=0;render();show("quiz")};
+$("back").onclick=()=>{if(cur>0){cur--;render()}};
+$("again").onclick=()=>{answers.fill(null);cur=0;$("toast").textContent="";show("intro")};
+$("share").onclick=async()=>{
+  const t=window._resultText||"";
+  if(navigator.share){try{await navigator.share({text:t});return}catch(e){if(e.name==="AbortError")return}}
+  navigator.clipboard.writeText(t).then(()=>$("toast").textContent="已複製，貼給朋友吧！").catch(()=>$("toast").textContent=t);
+};
+$("copy").onclick=()=>{
+  const t=window._resultText||"";
+  navigator.clipboard.writeText(t).then(()=>$("toast").textContent="已複製，可以貼到 IG 或 LINE。")
+    .catch(()=>$("toast").textContent=t);
+};
+</script>
+
+</body>
+</html>
